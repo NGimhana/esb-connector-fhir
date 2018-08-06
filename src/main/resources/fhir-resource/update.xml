@@ -19,15 +19,28 @@
 <template name="update" xmlns="http://ws.apache.org/ns/synapse">
     <parameter name="type" description="The name of a resource type"/>
     <parameter name="idToUpdate" description="The id to be update"/>
-
+    <parameter name="format" description="The format of the response"/>
     <sequence>
         <property name="uri.var.type" expression="$func:type"/>
         <property name="uri.var.idToUpdate" expression="$func:idToUpdate"/>
-
+        <property name="uri.var.format" expression="$func:format"/>
+        <script language="js">
+            <![CDATA[
+            var format = mc.getProperty('uri.var.format');
+            urlQuery = '';
+            if  (format != null && format != "") {
+                urlQuery += '_format=' + format + '&';
+            }
+            if  (urlQuery != null && urlQuery != "") {
+                urlQuery = '?' + urlQuery.toString().substring(0, urlQuery.toString().lastIndexOf("&"));
+            }
+            mc.setProperty('uri.var.format',urlQuery);
+            ]]>
+        </script>
         <call>
             <endpoint>
                 <http method="Put"
-                      uri-template="{uri.var.base}/{uri.var.type}/{uri.var.idToUpdate}"/>
+                      uri-template="{uri.var.base}/{uri.var.type}/{uri.var.idToUpdate}{+uri.var.format}"/>
             </endpoint>
         </call>
     </sequence>
