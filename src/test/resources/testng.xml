@@ -27,7 +27,7 @@
     </listeners>
     <test name="FHIR-Connector-Test" preserve-order="true" verbose="2">
         <classes>
-            <class name="org.wso2.carbon.connector.integration.test.FHIRConnectorIntegrationTest"/>
+            <class name="org.wso2.carbon.connector.integration.test.fhir.fhirConnectorIntegrationTest"/>
         </classes>
     </test>
 </suite>

@@ -37,18 +37,11 @@ public class FHIRConnectorIntegrationTest extends ConnectorIntegrationTestBase {
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
-        String connectorName = System.getProperty("connector_name") + "-connector-" +
-        System.getProperty("connector_version") + ".zip";
-        init(connectorName);
 
-        eiRequestHeadersMap.put("Accept-Charset", "UTF-8");
-        eiRequestHeadersMap.put("Content-Type", "application/json");
     }
 
     @Test(enabled = true, groups = {"wso2.ei"}, description = "FHIR test case")
     public void testSample() throws Exception {
-        log.info("Successfully tested");
-        RestResponse<JSONObject> eiRestResponse =
-                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "sampleRequest.json");
+
     }
 }
